@@ -1,16 +1,13 @@
 const express = require("express")
+const {createBlog, getBlogs} = require("../controllers/blogController")
 
 const router = express.Router()
 
 //GET request for getting blog posts
-router.get('/', (req, res) => {
-    res.json({mssg: "GET ALL BLOGS"})
-})
+router.get('/', getBlogs)
 
 //POST request for blog
-router.post('/', (req, res) => {
-    res.json({mssg: "POST BLOGS"})   
-})
+router.post('/',  createBlog)
 
 //GET BLOG WITH A ID
 router.get('/:id', (req, res) => {
