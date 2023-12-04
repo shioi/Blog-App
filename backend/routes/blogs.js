@@ -1,5 +1,5 @@
 const express = require("express")
-const {createBlog, getBlogs} = require("../controllers/blogController")
+const {createBlog, getBlogs, getBlog, deleteBlog, updateBlog} = require("../controllers/blogController")
 
 const router = express.Router()
 
@@ -10,19 +10,13 @@ router.get('/', getBlogs)
 router.post('/',  createBlog)
 
 //GET BLOG WITH A ID
-router.get('/:id', (req, res) => {
-    res.json({mssg: "GET with certain ID"})
-})
+router.get('/:id', getBlog)
 
 //DELETE BLOG WITH A ID
-router.delete('/:id', (req, res) => {
-    res.json({mssg: "DELETE with certain ID"})
-})
+router.delete('/:id', deleteBlog)
 
 //UPDATE BLOG WITH A ID
-router.patch('/:id', (req, res) => {
-    res.json({mssg: "PATCH with certain ID"})
-})
+router.patch('/:id', updateBlog)
 
 module.exports = router
 

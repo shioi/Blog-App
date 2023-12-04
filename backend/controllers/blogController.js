@@ -1,5 +1,5 @@
 const Blog = require('../models/blogModel')
-
+const mongoose = require('mongoose')
 // get all the blogs
 
 const getBlogs = async (req, res) => {
@@ -10,6 +10,23 @@ const getBlogs = async (req, res) => {
 
 
 //get single blog
+const getBlog = async (req, res) => {
+    //find the id
+    const { id } = req.params
+
+    //verify id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error:'No such blog'})
+    }
+
+    const blog = await Blog.findById(id)
+
+    if (!blog) {
+        return res.status(404).json({error: 'No such blog'})
+    }
+
+    return res.status(200).json(blog)
+}
 
 
 // create new blog
@@ -27,12 +44,55 @@ const createBlog = async (req, res) => {
 
 
 //delete a blog
+const deleteBlog = async (req, res) => {
+    //find the id
+    const { id } = req.params
+
+    //verify id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error:'No such blog'})
+    }   
+
+    const blog = await Blog.findOneAndDelete({ _id: id })
+    
+    if (!blog) {
+        return res.status(404).json({error: "No such blog"})
+    } 
+
+    return res.status(200).json(blog)
+}
 
 
 // update a blog
+const updateBlog = async (req, res) => {
+    //find the id
+    const { id } = req.params
+    console.log(req.body)
+
+    //verify id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error:'No such blog'})
+    }   
+
+    const blog = await Blog.findOneAndUpdate({ _id: id }, {
+        ...req.body
+    })
+
+    if (!blog) {
+        return res.status(404).json({error: "No such blog"})
+    } 
+
+    return res.status(200).json(blog)
+    
+}
+
+
 
 //export the functions
 module.exports = {
     createBlog,
-    getBlogs
+    getBlogs,
+    getBlog,
+    deleteBlog,
+    updateBlog
 }
