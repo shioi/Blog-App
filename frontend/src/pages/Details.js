@@ -5,7 +5,7 @@ const Details = ({ current }) => {
     const [blog, setBlog] = useState(null)
     useEffect(() => {
         const fetchBlog = async () => {
-            const results = await fetch('/api/blogs/' + current._id)
+            const results = await fetch('https://fp-blog.onrender.com/api/blogs/' + current._id)
             const json = await results.json()
             if (results.ok) {
                 setBlog(json)

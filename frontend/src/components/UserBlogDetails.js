@@ -21,7 +21,7 @@ const UserBlogDetails = ({ blog, func}) => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch('/api/blogs/' + blog._id, {
+    const response = await fetch('https://fp-blog.onrender.com/api/blogs/' + blog._id, {
       method: 'DELETE',
        headers: {
         'Authorization': `Bearer ${user.user.token}`

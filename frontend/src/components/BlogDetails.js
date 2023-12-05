@@ -20,7 +20,7 @@ const BlogDetails = ({ blog, func }) => {
     const newTotalLike = updatedLike ? totalLike + 1 : totalLike - 1;
 
     try {
-      const response = await fetch('/api/blogs/' + current._id, {
+      const response = await fetch('https://fp-blog.onrender.com/api/blogs/' + current._id, {
         method: 'PATCH',
         body: JSON.stringify({ likes: newTotalLike }),
         headers: {

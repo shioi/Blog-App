@@ -18,7 +18,7 @@ export const useLogin = () => {
         } else {
             body['username'] = arg1
         }
-        const response = await fetch('/api/user/login', {
+        const response = await fetch('https://fp-blog.onrender.com/api/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
