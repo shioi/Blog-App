@@ -1,11 +1,11 @@
 require("dotenv").config()
 const express = require('express')
-const blogRoutes = require('./backend/routes/blogs')
-const userRoutes = require('./backend/routes/user')
+const blogRoutes = require('./routes/blogs')
+const userRoutes = require('./routes/user')
 const mongoose = require('mongoose')
-const requireAuth = require('./backend/middleware/requireAuth')
-const User = require('./backend/models/userModel')
-const Blog = require('./backend/models/blogModel')
+const requireAuth = require('./middleware/requireAuth')
+const User = require('./models/userModel')
+const Blog = require('./models/blogModel')
 const path = require('path');
 //creating the express app
 app = express()
