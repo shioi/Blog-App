@@ -7,10 +7,14 @@ const requireAuth = require('./middleware/requireAuth')
 const User = require('./models/userModel')
 const Blog = require('./models/blogModel')
 const path = require('path');
+const cors = require('cors');
 //creating the express app
 app = express()
 
 //all middleware
+app.use(cors({
+    origin: '*'
+}));
 app.use(express.json())
 app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
