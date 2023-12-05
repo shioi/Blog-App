@@ -56,36 +56,45 @@ const editorRef = useRef(null);
         }
     }
 
-    return (
-        <>
-                    <div id="intro" class="p-5 text-center bg-light">
-                    <p class="mb-3">Update blog</p>
-                        </div>
-        <form onSubmit={handleSubmit} className="create">
-            <label>Title</label>
-            <input type="text"
-                onChange={(e) => setTitle(e.target.value)}
-                value = {title}
-            />
-            <Editor
-                    apiKey='nb87cvkruxycxaq7n05qnv3k9j2hjp4im87172hxvz0881yd'
-                    initialValue={body}
-                    onInit={(evt, editor) => (editorRef.current = editor)}
-                    init={{
+       return (
+        <div id="intro" className="blog-form-wrapper p-3">
+            <div className="blog-form-container">
+                <form onSubmit={handleSubmit} className="create">
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="title"
+                            className="form-control"
+                            onChange={(e) => setTitle(e.target.value)}
+                            value={title}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Editor
+                               apiKey='nb87cvkruxycxaq7n05qnv3k9j2hjp4im87172hxvz0881yd'
+                               initialValue={body}
+                            onInit={(evt, editor) => (editorRef.current = editor)}
+                            init={{
+                                   resize: 'both',
                         height: 300,
-                        width:800,
+                        max_width: 800,
+                        min_width:150,
                         menubar: false,
                         max_chars: 100
-                }}
-                />
-                 <div className="form-group">
-                    <label  htmlFor="fileInput" className="form-label">Upload File</label>
-                    <input onChange={handleFileChange} className="form-control" id="fileInput" type="file" name="fileinput" />
-                </div>
-            <button>Post</button>
-            </form>
-            </>
-    )
-}
+                            }}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input onChange={handleFileChange} className="form-control" id="fileInput" type="file" name="fileinput" />
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <button className="btn-submit" style={{ color: 'black', display: 'block', margin: '0 auto' }}>Post</button>
+                </form>
+            </div>
+        </div>
+    );
+};  
 
 export default EditBlogForm

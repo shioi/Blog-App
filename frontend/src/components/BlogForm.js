@@ -77,10 +77,12 @@ const BlogForm = () => {
                             apiKey='nb87cvkruxycxaq7n05qnv3k9j2hjp4im87172hxvz0881yd'
                             onInit={(evt, editor) => (editorRef.current = editor)}
                             init={{
-                                height: 300,
-                                width: 770,
-                                menubar: false,
-                                max_chars: 100
+                                   resize: 'both',
+                        height: 300,
+                        max_width: 800,
+                        min_width:150,
+                        menubar: false,
+                        max_chars: 100
                             }}
                         />
                     </div>
@@ -88,7 +90,7 @@ const BlogForm = () => {
                         <input onChange={handleFileChange} className="form-control" id="fileInput" type="file" name="fileinput" />
                     </div>
                     {error && <p className="error-message">{error}</p>}
-                    <button className="btn-submit">Post</button>
+                    <button className="btn-submit" style={{ color: 'black', display: 'block', margin: '0 auto' }}>Post</button>
                 </form>
             </div>
         </div>
