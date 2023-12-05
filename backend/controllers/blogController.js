@@ -1,16 +1,18 @@
 const Blog = require('../models/blogModel')
+const User = require('../models/userModel')
 const mongoose = require('mongoose')
 // get all the blogs
 
 const getBlogs = async (req, res) => {
+    
     const blogs = await Blog.find({})
-
     res.status(200).json(blogs)
 }
 
 
 //get single blog
 const getBlog = async (req, res) => {
+    console.log("hello")    
     //find the id
     const { id } = req.params
 
@@ -31,9 +33,12 @@ const getBlog = async (req, res) => {
 
 // create new blog
 const createBlog = async (req, res) => {
-    const { username, title, body} = req.body
+    const { title, body } = req.body
+    const username = req.user.username
     const likes = 0
     const Image = "asd"
+    console.log(username)
+    console.log(body)
     try {
         const blog = await Blog.create({ username, title, body, Image, likes })
         res.status(200).json(blog)
