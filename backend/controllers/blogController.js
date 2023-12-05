@@ -40,7 +40,7 @@ const createBlog = async (req, res) => {
     const { title, body} = req.body
     const username = req.user.username
     const likes = 0
-    const Image = req.filename
+    const Image = req.filename ? req.filename : 'lambda_cover.png'
     try {
         const blog = await Blog.create({ username, title, body, Image, likes })
         res.status(200).json(blog)

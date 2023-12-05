@@ -1,40 +1,73 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import BlogDetails from "../components/BlogDetails";
 
-//components
-import BlogDetails from "../components/BlogDetails"
-
-
-const Home = ({ func}) => {
-    const [blogs, setBlogs] = useState(null)
+const Home = ({ func }) => {
+    const [blogs, setBlogs] = useState(null);
+    const [filteredBlogs, setFilteredBlogs] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchBlogs = async () => {
-            const results = await fetch('/api/blogs')
-            console.log(results)
-            const json = await results.json()
-            if (results.ok) {
-                setBlogs(json)
+            try {
+                const results = await fetch('/api/blogs');
+                const json = await results.json();
+                if (results.ok) {
+                    setBlogs(json);
+                    setFilteredBlogs(json);
+                }
+            } catch (error) {
+                console.error("Error fetching blogs:", error);
             }
+        };
+        fetchBlogs();
+    }, []);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchTerm === "") {
+            setFilteredBlogs(blogs);
+            return;
         }
-        fetchBlogs()
-    }, [])
-    
+        const filterBlogs = blogs.filter((blog) =>
+            blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            blog.username.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredBlogs(filterBlogs);
+    };
+
+    const handleInputChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
     return (
         <main className="my-5">
             <div className="container">
-                <section class="text-center">
+                <section className="text-center">
                     <div className="row">
-                            <div id="intro" class="p-1 text-center bg-light">
-                    <h1 class="mb-3 h2">Share your Programing Experience</h1>
+                        <div id="intro" className="p-1 text-center bg-light">
+                            <h1 className="mb-3 h2">Share your Programming Experience</h1>
+                            <form className="d-flex" onSubmit={handleSearch}>
+                                <input
+                                    className="form-control me-2"
+                                    type="search"
+                                    placeholder="Search by title or username"
+                                    aria-label="Search"
+                                    value={searchTerm}
+                                    onChange={handleInputChange}
+                                />
+                                <button className="btn btn-outline-success" type="submit">
+                                    Search
+                                </button>
+                            </form>
                         </div>
-                {blogs && blogs.map((blog) => (
-                    <BlogDetails key={ blog._id} blog={blog} func={func}/>
-                ))}
+                        {filteredBlogs && filteredBlogs.map((blog) => (
+                            <BlogDetails key={blog._id} blog={blog} func={func} />
+                        ))}
                     </div>
-                    </section>
+                </section>
             </div>
         </main>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

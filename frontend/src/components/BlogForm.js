@@ -12,12 +12,10 @@ const BlogForm = () => {
     //for file upload
     const [file, setFile] = useState(null);
 
-      const handleFileChange = (e) => {
-          const selectedFile = e.target.files[0];
-          console.log("hello")
-          console.log(selectedFile)
-    setFile(selectedFile);
-  };
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+    };
 
     const handleSubmit = async (e) => {    
         e.preventDefault();
@@ -51,6 +49,7 @@ const BlogForm = () => {
                 setTitle('');
                 setError(null);
                 console.log("New blog added");
+                window.location.reload()
             }
         } catch (error) {
             // Handle fetch or other runtime errors
@@ -59,40 +58,39 @@ const BlogForm = () => {
     };
 
     return (
-        <div id="intro" className="blog-form-container p-3">
-            <h2 className="form-title">Write Blog</h2>
-            <form onSubmit={handleSubmit} className="create">
-                <div className="form-group">
-                    <label htmlFor="title">Title</label>
-                    <input
-                        type="text"
-                        id="title"
-                        className="form-control"
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="body">Body</label>
-                    <Editor
-                        apiKey='nb87cvkruxycxaq7n05qnv3k9j2hjp4im87172hxvz0881yd'
-                        onInit={(evt, editor) => (editorRef.current = editor)}
-                        init={{
-                            height: 300,
-                            width: 800,
-                            menubar: false,
-                            max_chars: 100
-                        }}
-                    />
-                </div>
-                <div className="form-group">
-                    <label  htmlFor="fileInput" className="form-label">Upload File</label>
-                    <input onChange={handleFileChange} className="form-control" id="fileInput" type="file" name="fileinput" />
-                </div>
-                {error && <p className="error-message">{error}</p>}
-                <button className="btn-submit">Post</button>
-            </form>
+        <div id="intro" className="blog-form-wrapper p-3">
+            <div className="blog-form-container">
+                <form onSubmit={handleSubmit} className="create">
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="title"
+                            className="form-control"
+                            onChange={(e) => setTitle(e.target.value)}
+                            value={title}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Editor
+                            apiKey='nb87cvkruxycxaq7n05qnv3k9j2hjp4im87172hxvz0881yd'
+                            onInit={(evt, editor) => (editorRef.current = editor)}
+                            init={{
+                                height: 300,
+                                width: 770,
+                                menubar: false,
+                                max_chars: 100
+                            }}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input onChange={handleFileChange} className="form-control" id="fileInput" type="file" name="fileinput" />
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <button className="btn-submit">Post</button>
+                </form>
+            </div>
         </div>
     );
 };
