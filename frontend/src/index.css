@@ -135,3 +135,19 @@ body{
     width: 48px!important;
     height: 48px!important;
 }
+
+.fade-text {
+  position: relative;
+  overflow: hidden;
+  max-height: 3.6em; /* Adjust as needed */
+}
+
+.fade-text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70px; /* Adjust width of the fade effect */
+  height: 1.5em; /* Adjust height of the fade effect */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}

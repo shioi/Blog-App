@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, isYesterday, parseISO } from 'date-fns';
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const UserBlogDetails = ({ blog, func }) => {
+const UserBlogDetails = ({ blog, func}) => {
   const user = useAuthContext()
   const navigate = useNavigate();
   const handleClick = (blog) => {
@@ -32,7 +32,11 @@ const UserBlogDetails = ({ blog, func }) => {
       console.log("deleted", json)
       window.location.reload()
     }
+  }
 
+  const handleUpdate = async (blog) => {
+      func(blog)
+      navigate("/update");
   }
 
   return (
@@ -56,6 +60,7 @@ const UserBlogDetails = ({ blog, func }) => {
               <p onClick={() => handleClick(blog)} className="btn btn-primary">Read</p>
             </div>
             <div className="text-body-secondary position-absolute top-0 end-0 p-3">
+              <i className="bi bi-pencil-fill p-4" onClick={() => handleUpdate(blog)}></i>
               <i className="bi bi-trash-fill" onClick={handleDelete} style={{ cursor: 'pointer' }}></i>
             </div>
             <div className="text-body-secondary float-end p-3" style={{ marginTop: '2rem' }}>

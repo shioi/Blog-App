@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Details from './pages/Details';
 import Account from './pages/Account';
+import EditBlogForm from './components/EditBlogForm';
 
 function App() {
 
@@ -46,7 +47,11 @@ function App() {
             />  
             <Route
               path='/details'
-              element={<Details current={ currentblog} />}
+              element={<Details current={currentblog} />}
+            />
+            <Route 
+              path='/update'
+              element={<EditBlogForm current={currentblog} />}
             />
           </Routes>
         </div>

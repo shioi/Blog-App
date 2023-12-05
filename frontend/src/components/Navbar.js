@@ -38,11 +38,6 @@ const Navbar = () => {
                                     <p className="nav-link active" aria-current="page">Post</p>
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to="/post">
-                                    <p className="nav-link active" aria-current="page">History</p>
-                                </Link>
-                            </li>
                         </ul>
                         <ul>
                             {user &&

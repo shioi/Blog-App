@@ -4,7 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 //component
 import UserBlogDetails from "../components/UserBlogDetails"
 
-const Account = ({func}) => {
+const Account = ({func, setTitle, setBody}) => {
     const user = useAuthContext()
     const [userinfo, setUserInfo] = useState('')
     const [userposts, setUserPosts] = useState('')
@@ -56,7 +56,9 @@ const Account = ({func}) => {
                                 {userposts && 
                                     userposts.map((post) => (
                                         <UserBlogDetails key={post._id}
-                                        blog={post} func={func}
+                                            blog={post} func={func}
+                                            setTitle={setTitle}
+                                            setBody={setBody}
                                         />
                                     ))
                                 }
