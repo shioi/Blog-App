@@ -52,7 +52,7 @@ const UserBlogDetails = ({ blog, func}) => {
           <div className="col-md-4">
             <div className="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               {/* Add max-height style to limit image height */}
-              <img src={"images/" + blog.Image} className="img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '200px' }} />
+              <img src={"https://fp-blog.onrender.com/images/" + blog.Image} className="img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '200px' }} />
               <p onClick={() => handleClick(blog)}>
                 <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
               </p>

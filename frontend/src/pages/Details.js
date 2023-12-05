@@ -18,7 +18,7 @@ const Details = ({ current }) => {
         <>
             {blog &&
                 <div id="intro" className="blog-container p-3">
-                    <div className="blog-header" style={{ backgroundImage: `url(images/${blog.Image})` }}>
+                    <div className="blog-header" style={{ backgroundImage: `url(https://fp-blog.onrender.com/images/${blog.Image})` }}>
                         <div className="overlay"></div>
                         <div className="header-content">
                             <h3 className="mb-3">{blog.title}</h3>
