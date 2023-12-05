@@ -17,15 +17,19 @@ const Details = ({ current }) => {
     return (
         <>
             {blog &&
-                <div>
-                <div id="intro" class="p-5 text-center bg-light">
-                    <h3 class="mb-3">{blog.title}</h3>
-                </div>
-                    <p className="card-text" dangerouslySetInnerHTML={{ __html: blog.body }}></p>
+                <div id="intro" className="blog-container p-3">
+                    <div className="blog-header" style={{ backgroundImage: `url(images/${blog.Image})` }}>
+                        <div className="overlay"></div>
+                        <div className="header-content">
+                            <h3 className="mb-3">{blog.title}</h3>
+                        </div>
                     </div>
+                    <div className="blog-body">
+                        <p className="card-text" dangerouslySetInnerHTML={{ __html: blog.body }}></p>
+                    </div>
+                </div>
             }
         </>
     )
 }
-
 export default Details;

@@ -1,5 +1,7 @@
 const Blog = require('../models/blogModel')
 const User = require('../models/userModel')
+const fileUpload = require('express-fileupload');
+
 const mongoose = require('mongoose')
 // get all the blogs
 
@@ -31,14 +33,14 @@ const getBlog = async (req, res) => {
 }
 
 
+
 // create new blog
 const createBlog = async (req, res) => {
-    const { title, body } = req.body
+    console.log(req.body)
+    const { title, body} = req.body
     const username = req.user.username
     const likes = 0
-    const Image = "asd"
-    console.log(username)
-    console.log(body)
+    const Image = req.filename
     try {
         const blog = await Blog.create({ username, title, body, Image, likes })
         res.status(200).json(blog)
@@ -70,10 +72,19 @@ const deleteBlog = async (req, res) => {
 
 // update a blog
 const updateBlog = async (req, res) => {
+    console.log("new request")
     //find the id
     const { id } = req.params
+    console.log(req)
     console.log(req.body)
-
+    try {
+        const Image = req.filename
+        req.body.Image = Image
+        console.log(req.body)
+    } catch (error) {
+     console.log("no file")   
+    }
+    
     //verify id
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error:'No such blog'})

@@ -1,50 +1,85 @@
-import React from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { formatDistanceToNow, isYesterday, parseISO } from 'date-fns';
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const BlogDetails = ({ blog, func }) => {
+  const user = useAuthContext();
   const navigate = useNavigate();
-  const handleClick = (blog) => {
-    func(blog)
-    navigate("/details")
-  }
+  const [liked, setLiked] = useState(false);
+  const [totalLike, setTotalLike] = useState(blog.likes)
 
-    const formattedDate = (date) => {
+  const handleClick = (blog) => {
+    func(blog);
+    navigate('/details');
+  };
+
+ const handleLikeClick = async (current) => {
+    const updatedLike = !liked;
+    setLiked(updatedLike);
+    const newTotalLike = updatedLike ? totalLike + 1 : totalLike - 1;
+
+    try {
+      const response = await fetch('/api/blogs/' + current._id, {
+        method: 'PATCH',
+        body: JSON.stringify({ likes: newTotalLike }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.user.token}`
+        }
+      });
+
+      if (!response.ok) {
+        console.log("Error occurred while updating likes.");
+        // Revert the like status if the update fails
+        setLiked(!updatedLike);
+      } else {
+        // Update totalLike if the update is successful
+        setTotalLike(newTotalLike);
+        console.log("Liked");
+      }
+    } catch (error) {
+      console.log('An error occurred. Please try again.');
+    }
+  };
+
+
+  const formattedDate = (date) => {
     const parsedDate = parseISO(date);
     if (isYesterday(parsedDate)) {
       return 'Posted yesterday';
     } else {
       return formatDistanceToNow(parsedDate, { addSuffix: true });
     }
-    };
-  
+  };
+
   const formatText = (text) => {
-    const words = text.split(/\s+/); // Split the string into words by whitespace
-    const first30Words = words.slice(0, 15).join(' '); // Take the first 30 words and join them back into a string
-    console.log(first30Words)
+    const words = text.split(/\s+/);
+    const first30Words = words.slice(0, 15).join(' ');
     return first30Words;
-  }
+  };
 
   return (
     <div className="col-lg-4 col-md-12 mb-4">
       <div className="card rounded-3">
-        <div className="bg-image hover-overlay ripple " data-mdb-ripple-color="light">
-          <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" className="img-fluid rounded-3" />
+        <div className="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src={`/images/${blog.Image}`} className="img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
           <a href="#">
-            <div className="mask" style={{ 'background-color': 'rgba(251, 251, 251, 0.15)' }}></div>
+            <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
           </a>
         </div>
-        <div className="card-body">
-          <h5 className="card-title">{blog.title}</h5>
-          {/* Rendering HTML content using dangerouslySetInnerHTML */}
-          <p className="card-text" dangerouslySetInnerHTML={{ __html: formatText(blog.body) }}></p>
-          <p onClick={() => handleClick(blog)} className="btn btn-primary">Read</p>
-        </div>
-        <div className="class-body">
-          <p class="blockquote-footer">{blog.username}</p>
-        </div>
-        <div className="card-footer text-body-secondary">
-          <p>{formattedDate(blog.createdAt)}</p>
+        <div className="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <h5 className="card-title">{blog.title}</h5>
+            <p className="card-text" dangerouslySetInnerHTML={{ __html: formatText(blog.body) }}></p>
+            <p className="blockquote-footer">{blog.username}</p>
+            <p>{formattedDate(blog.createdAt)}</p>
+            <p onClick={() => handleClick(blog)} className="btn btn-primary">Read</p>
+          </div>
+          <div className="text-body-secondary position-absolute top-0 end-0 p-3">
+              <i className={`bi ${liked ? 'bi-heart-fill' : 'bi-heart'}`} onClick={() => handleLikeClick(blog)} style={{ cursor: 'pointer' }}></i>
+            <p>{totalLike}</p>            
+            </div>
         </div>
       </div>
     </div>
@@ -52,4 +87,3 @@ const BlogDetails = ({ blog, func }) => {
 };
 
 export default BlogDetails;
-

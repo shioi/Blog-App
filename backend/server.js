@@ -6,11 +6,13 @@ const mongoose = require('mongoose')
 const requireAuth = require('./middleware/requireAuth')
 const User = require('./models/userModel')
 const Blog = require('./models/blogModel')
+const path = require('path');
 //creating the express app
 app = express()
 
 //all middleware
 app.use(express.json())
+app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)

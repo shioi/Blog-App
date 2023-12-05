@@ -24,12 +24,11 @@ const Home = ({ func}) => {
             <div className="container">
                 <section class="text-center">
                     <div className="row">
-                            <div id="intro" class="p-5 text-center bg-light">
+                            <div id="intro" class="p-1 text-center bg-light">
                     <h1 class="mb-3 h2">Share your Programing Experience</h1>
-                    <p class="mb-3">Programming is new magic!!</p>
                         </div>
                 {blogs && blogs.map((blog) => (
-                    <BlogDetails key={blog._id} blog={blog} func={func} />
+                    <BlogDetails key={ blog._id} blog={blog} func={func}/>
                 ))}
                     </div>
                     </section>

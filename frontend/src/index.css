@@ -151,3 +151,41 @@ body{
   height: 1.5em; /* Adjust height of the fade effect */
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
+
+.blog-container {
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+    /* Add other styles as needed */
+}
+
+.blog-header {
+    position: relative;
+    height: 300px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust transparency as needed */
+}
+
+.header-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1;
+}
+
+.blog-body {
+    padding: 20px;
+    /* Add other styles as needed */
+}

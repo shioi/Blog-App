@@ -1,14 +1,25 @@
 import { useState, useRef} from "react"
 import { Editor } from "@tinymce/tinymce-react"
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate } from "react-router-dom";
 
 
-const EditBlogForm = ({current}) => {
+const EditBlogForm = ({ current }) => {
+    const navigate = useNavigate();
     //we have to create state for each of the property
     const user = useAuthContext()
     const [title, setTitle] = useState(current.title)
     const [body, setBody] = useState(current.body)    
     const [error, setError] = useState(null)    
+        //for file upload
+    const [file, setFile] = useState(null);
+
+      const handleFileChange = (e) => {
+          const selectedFile = e.target.files[0];
+          console.log("hello")
+          console.log(selectedFile)
+    setFile(selectedFile);
+  };
 
 const editorRef = useRef(null);
   
@@ -19,16 +30,16 @@ const editorRef = useRef(null);
             return 
         }
         
-        if (editorRef.current) {
-            console.log(editorRef.current.getContent());
-            }
-        const blog = { title, body: editorRef.current.getContent() }
+        
+       const formData = new FormData()
+        formData.append('title', title)
+        formData.append('body', editorRef.current.getContent())
+        formData.append('file', file);
         //console.log(user)
         const response = await fetch('/api/blogs/' + current._id , {
             method: 'PATCH',
-            body: JSON.stringify(blog),
+            body: formData,
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.user.token}`
             }
         })
@@ -41,7 +52,7 @@ const editorRef = useRef(null);
             setTitle('')
             setBody('')
             setError(null)
-            console.log("blog updated")
+            navigate("/")
         }
     }
 
@@ -66,7 +77,11 @@ const editorRef = useRef(null);
                         menubar: false,
                         max_chars: 100
                 }}
-            />
+                />
+                 <div className="form-group">
+                    <label  htmlFor="fileInput" className="form-label">Upload File</label>
+                    <input onChange={handleFileChange} className="form-control" id="fileInput" type="file" name="fileinput" />
+                </div>
             <button>Post</button>
             </form>
             </>
