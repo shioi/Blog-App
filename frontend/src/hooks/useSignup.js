@@ -20,6 +20,7 @@ export const useSignup = () => {
         if (!response.ok) {
             setIsLoading(false)
             setError(json.error)
+            return null;
         }
         if (response.ok) {
             // saveing the user to the local storage JWT
@@ -27,6 +28,7 @@ export const useSignup = () => {
             //update the authcontext
             dispatch({type: 'LOGIN', PAYLOAD: json})
             setIsLoading(false)
+            return true;
         }
     }
 

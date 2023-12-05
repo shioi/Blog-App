@@ -9,8 +9,10 @@ const Login = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await login(username, password);
-        window.location.reload();
+        const res = await login(username, password);
+        if (res) {
+            window.location.reload();
+        }
     };
 
     const handleRegister = () => {

@@ -14,7 +14,7 @@ const Signup = () => {
         e.preventDefault()
 
         const response = await signup(email, username, password)
-        if (response.ok) {
+        if (response) {
             navigate('/')
         }
     }
