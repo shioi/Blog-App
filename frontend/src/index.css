@@ -218,3 +218,12 @@ body{
 }
 
 /* Add more styles as needed */
+/* Add this CSS in your stylesheet or style tag */
+.card {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

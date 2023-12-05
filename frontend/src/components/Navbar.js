@@ -25,12 +25,11 @@ const Navbar = () => {
                         </p>
                     </Link>
 
-                    <button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-                        aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                        <i className="fas fa-bars"></i>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <i className="bi bi-list"></i>
                     </button>
 
-                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <Link to="/">
@@ -45,10 +44,14 @@ const Navbar = () => {
                         </ul>
                         <ul>
                             {user &&
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <li className="nav-item dropdown d-flex align-items-center">
+                                    <p className="nav-link dropdown-toggle text-white" href="#" role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                        style={{ paddingRight: '90px' }}
+                                    >
                                         {user.username}
-                                    </a>
+                                    </p>
                                     <ul className="dropdown-menu">
                                         <Link to="/account">
                                             <li><a className="dropdown-item">Profile</a></li>

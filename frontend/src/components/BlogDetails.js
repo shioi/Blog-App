@@ -61,9 +61,10 @@ const BlogDetails = ({ blog, func }) => {
 
   return (
     <div className="col-lg-4 col-md-12 mb-4">
+      <a onClick={() => handleClick(blog)}>
       <div className="card rounded-3">
-        <div className="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src={`https://fp-blog.onrender.com/images/${blog.Image}`} className="img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
+        <div className="hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src={`https://fp-blog.onrender.com/images/${blog.Image}`} className="card-img-top img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
           <a href="#">
             <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
           </a>
@@ -76,12 +77,13 @@ const BlogDetails = ({ blog, func }) => {
             <p>{formattedDate(blog.createdAt)}</p>
             <p onClick={() => handleClick(blog)} className="btn btn-primary">Read</p>
           </div>
-          <div className="text-body-secondary position-absolute top-0 end-0 p-3">
+          <div className="text-body-secondary position-absolute bottom-0 end-0 p-3">
               <i className={`bi ${liked ? 'bi-heart-fill' : 'bi-heart'}`} onClick={() => handleLikeClick(blog)} style={{ cursor: 'pointer' }}></i>
             <p>{totalLike}</p>            
             </div>
         </div>
-      </div>
+        </div>
+        </a>
     </div>
   );
 };
