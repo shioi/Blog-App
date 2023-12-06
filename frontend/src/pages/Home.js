@@ -64,7 +64,7 @@ return (
                 <section className="text-center">
                     <div className="row">
                         <div id="intro" className="p-1 text-center">
-                        <h1 className="mb-1 h2 fw-bold text-body-primary font-monospace" style={{ color: 'darkpink' }}>Latest posts</h1>        
+                        <h1 className="mb-1 h2 fw-bold text-body-primary font-monospace" style={{ color: 'darkpink' }}>Welcome to Functional Programming Blogs</h1>        
                             <div className="d-flex justify-content-between align-items-center">
                                 <form className="d-flex" onSubmit={handleSearch}>
                                     <input
