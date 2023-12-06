@@ -46,7 +46,8 @@ const UserBlogDetails = ({ blog, func}) => {
   }
 
   return (
-    <div className="col-lg-12 mb-4 p-3">
+    <div className="col-lg-12 mb-4">
+      <a onClick={() => handleClick(blog)}>
       <div className="card mb-3">
         <div className="row g-0">
           <div className="col-md-4">
@@ -60,14 +61,17 @@ const UserBlogDetails = ({ blog, func}) => {
           </div>
           <div className="col-md-8 position-relative">
             <div className="card-body">
-              <h5 className="card-title">{blog.title}</h5>
-              {/* Rendering HTML content using dangerouslySetInnerHTML */}
-              <p className="card-text" dangerouslySetInnerHTML={{ __html: formatText(blog.body) }}></p>
-              <p onClick={() => handleClick(blog)} className="btn btn-primary">Read</p>
+              <h5 className="card-title font-weight-bold">{blog.title}</h5>
             </div>
             <div className="text-body-secondary position-absolute top-0 end-0 p-3">
-              <i className="bi bi-pencil-fill p-4" onClick={() => handleUpdate(blog)} style={{ cursor: 'pointer' }}></i>
-              <i className="bi bi-trash-fill" onClick={handleDelete} style={{ cursor: 'pointer' }}></i>
+                <i className="bi bi-pencil-fill p-4" onClick={(e) => {
+                  e.stopPropagation();
+                  handleUpdate(blog)
+                }} style={{ cursor: 'pointer' }}></i>
+                <i className="bi bi-trash-fill" onClick={(e) => {
+                    e.stopPropagation();
+                  handleDelete()
+                }} style={{ cursor: 'pointer' }}></i>
             </div>
             <div className="text-body-secondary float-end p-3" style={{ marginTop: '2rem' }}>
               <p>{formattedDate(blog.createdAt)}</p>
@@ -75,6 +79,7 @@ const UserBlogDetails = ({ blog, func}) => {
           </div>
         </div>
       </div>
+      </a>
     </div>
   );
 };

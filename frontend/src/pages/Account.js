@@ -36,7 +36,7 @@ const Account = ({func, setTitle, setBody}) => {
     }, [user])
 
     return (
-       <div id="intro" class="container bootstrap snippets bootdey p-3">
+       <div id="intro" class="container bootstrap snippets bootdey p-5">
 <div class="row ng-scope">
     <div class="col-md-3">
         <div class="panel panel-default">

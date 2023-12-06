@@ -53,6 +53,8 @@ const Home = ({ func }) => {
             sorted.sort((a, b) => a.title.localeCompare(b.title));
         } else if (criteria === 'date') {
             sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        } else if (criteria === 'likes') {
+            sorted.sort((a, b) => a.likes < b.likes);
         }
 
         setFilteredBlogs(sorted);
@@ -91,6 +93,7 @@ return (
                                         <option value="">Select</option>
                                         <option value="title">Title</option>
                                         <option value="date">Date</option>
+                                        <option value="likes">Like Count</option>
                                     </select>
                                     </div>
                                 </div>
