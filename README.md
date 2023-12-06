@@ -30,6 +30,13 @@ This is a as simple blog application where users can post their blogs mainly abo
 * you can click on your profile to edit any post
 * Can add images as cover image
 
+### Future Enhancement
+* Following
+* Ranking of users based on amount of likes
+* Comment section
+* Serving Notification
+* UI Improvement
+
 ## Authors
 
 Saiyam Chettri
