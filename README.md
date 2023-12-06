@@ -32,12 +32,19 @@ This is a simple blog application where users can post their blogs mainly about 
 * Can add images as the cover image
 
 ### Basic Design
-* Node.js server serving the required APIs for all the required operations like getting the post, logging in the users, etc.
+* Node.js server serving the required APIs for all the required operations like getting the post, logging in to the users, etc.
+* The database used was MongoDB Atlas Database Free tier.
+* The collections were made for User and Post
+* Mongoose was used for interaction with Node.js and Atlas. It provides a base solution for MongoDB that is easier to manage.
+* The username is unique for the user
+* The post can also contain images whose link is saved in the Database, and the original file is stored in the filesystem
 * The endpoints were first verified using postman
   ![Postman screenshot](https://raw.githubusercontent.com/shioi/Blog-App/main/post.png)
 * The user authentication was done using JWT to secure the endpoints.
 * After all the endpoints worked, The frontend was implemented using React and Bootstrap.
 * It is a basic CRUD application where react sends the HTTP requests using fetch and updates the states
+* After verifying the application on the local machine, it was hosted through Render.com, which provides a free hosting service
+* We hosted two applications, one for the backend serving APIs and one for the front end. 
 
 ### OUTPUT
 ![Postman screenshot](https://raw.githubusercontent.com/shioi/Blog-App/main/final.png)
@@ -45,7 +52,7 @@ This is a simple blog application where users can post their blogs mainly about 
 
 ### Future Enhancement
 * Following
-* Ranking of users based on the amount of likes
+* Ranking of users based on the number of likes
 * Comment section
 * Serving Notification
 * UI Improvement
