@@ -15,7 +15,7 @@ const Signup = () => {
 
         const response = await signup(email, username, password)
         if (response) {
-            navigate('/')
+            window.location.reload();
         }
     }
     const handleLogin = () => {
@@ -65,12 +65,12 @@ const Signup = () => {
                                                 value={password}
                                             />
                                         </div>
-                                        <button disabled={isLoading} type="submit" className="btn btn-primary btn-block">Login</button>
+                                        <button disabled={isLoading} type="submit" className="btn btn-primary btn-block">Register</button>
                                         {error && <div className="text-danger mt-3">{error}</div>}
                                     </form>
                                     <div className="mt-3 text-center">
                                         <p>Already have an account?</p>
-                                        <button onClick={ handleLogin} className="btn btn-outline-secondary">Register</button>
+                                        <button onClick={ handleLogin} className="btn btn-outline-secondary">Login</button>
                                     </div>
                                     <div>
                                         {error && <p>{error} </p>}

@@ -14,7 +14,10 @@ const BlogDetails = ({ blog, func }) => {
     navigate('/details');
   };
 
- const handleLikeClick = async (current) => {
+  const handleLikeClick = async (current) => {
+    if (!user.user) {
+      navigate('/login')
+    }
     const updatedLike = !liked;
     setLiked(updatedLike);
     const newTotalLike = updatedLike ? totalLike + 1 : totalLike - 1;
