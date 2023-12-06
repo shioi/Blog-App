@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { logout } = useLogout();
     const { user } = useAuthContext();
+
+    const isActiveTab = (path) => {
+        return location.pathname === path ? 'active' : '';
+    };
+
 
     const handleClick = () => {
         console.log("Logging out");
@@ -17,11 +23,11 @@ const Navbar = () => {
 
     return (
         <header>
-            <nav className="navbar navbar-expand-lg navbar-light bg-dark fixed-top" data-bs-theme="dark">
+            <nav className="navbar navbar-expand-lg bg-dark fixed-top" data-bs-theme="dark">
                 <div className="container-fluid">
                     <Link to="/">
                         <p className="navbar-brand" target="/">
-                            <img src="/images/image.webp" height="16" alt="" loading="lazy" />
+                            <img src="/images/logo.png" height="50" width="80" alt="Logo" loading="lazy" />
                         </p>
                     </Link>
 

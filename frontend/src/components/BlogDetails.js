@@ -55,35 +55,42 @@ const BlogDetails = ({ blog, func }) => {
 
   const formatText = (text) => {
     const words = text.split(/\s+/);
-    const first30Words = words.slice(0, 15).join(' ');
+    const first30Words = words.slice(0, 30).join(' ');
     return first30Words;
   };
 
-  return (
-    <div className="col-lg-4 col-md-12 mb-4">
+ return (
+    <div className="col">
       <a onClick={() => handleClick(blog)}>
-      <div className="card rounded-3">
-        <div className="hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src={`https://fp-blog.onrender.com/images/${blog.Image}`} className="card-img-top img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
-          <a href="#">
-            <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
-          </a>
-        </div>
-        <div className="card-body d-flex justify-content-between align-items-center">
-          <div>
-            <h5 className="card-title">{blog.title}</h5>
-            <p className="card-text" dangerouslySetInnerHTML={{ __html: formatText(blog.body) }}></p>
-            <p className="blockquote-footer">{blog.username}</p>
-            <p>{formattedDate(blog.createdAt)}</p>
-            <p onClick={() => handleClick(blog)} className="btn btn-primary">Read</p>
+        <div className="card rounded-3 text-bg-light h-100">
+          <div className="hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src={`https://fp-blog.onrender.com/images/${blog.Image}`} className="card-img-top img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
+            <a href="#">
+              <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
+            </a>
           </div>
-          <div className="text-body-secondary position-absolute bottom-0 end-0 p-3">
-              <i className={`bi ${liked ? 'bi-heart-fill' : 'bi-heart'}`} onClick={() => handleLikeClick(blog)} style={{ cursor: 'pointer' }}></i>
-            <p>{totalLike}</p>            
+          <div className="card-body d-flex flex-column justify-content-between">
+            <div>
+              <h5 className="card-title">{blog.title}</h5>
+              <p className="card-text" dangerouslySetInnerHTML={{ __html: formatText(blog.body) }}></p>
+              <p className="blockquote-footer">{blog.username}</p>
             </div>
+        <div className="text-body-secondary d-flex align-items-center justify-content-between mt-auto" style={{ backgroundColor: 'white' }}>
+  <p className='card-text'><small className="text-body-secondary">{formattedDate(blog.createdAt)}</small></p>
+  <div className="d-flex align-items-center">
+               <i className={`bi ${liked ? 'bi-heart-fill' : 'bi-heart'}`} onClick={(e) =>
+               {
+                e.stopPropagation(); // Stop the event from propagating 
+                 handleLikeClick(blog)
+                 
+               }}
+                 style={{ cursor: 'pointer' }}></i>
+    <p className="mb-0 ms-1">{totalLike}</p>
+  </div>
+</div>
+          </div>
         </div>
-        </div>
-        </a>
+      </a>
     </div>
   );
 };
