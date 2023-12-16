@@ -5,7 +5,7 @@ const Details = ({ current }) => {
     const [blog, setBlog] = useState(null)
     useEffect(() => {
         const fetchBlog = async () => {
-            const results = await fetch('https://fp-blog.onrender.com/api/blogs/' + current._id)
+            const results = await fetch('/api/blogs/' + current._id)
             const json = await results.json()
             if (results.ok) {
                 setBlog(json)
@@ -16,19 +16,22 @@ const Details = ({ current }) => {
 
     return (
         <>
-            {blog &&
-                <div id="intro" className="blog-container p-3">
-                    <div className="blog-header" style={{ backgroundImage: `url(https://fp-blog.onrender.com/images/${blog.Image})` }}>
-                        <div className="overlay"></div>
-                        <div className="header-content">
-                            <h3 className="mb-3">{blog.title}</h3>
-                        </div>
-                    </div>
-                    <div className="blog-body">
-                        <p className="card-text" dangerouslySetInnerHTML={{ __html: blog.body }}></p>
-                    </div>
-                </div>
-            }
+            {blog && (
+  <div id="intro" className="blog-container p-3">
+
+    <div className="blog-header" style={{ backgroundImage: `url(${blog.Image})` }}>
+      <div className="overlay"></div>
+      <div className="header-content">
+        <h3 className="mb-3">{blog.title}</h3>
+      </div>
+    </div>
+
+    <div className="blog-body">
+      <p className="card-text" dangerouslySetInnerHTML={{ __html: blog.body }}></p>
+    </div>
+  </div>
+)}
+
         </>
     )
 }

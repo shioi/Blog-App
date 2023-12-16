@@ -9,7 +9,7 @@ const Home = ({ func }) => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const results = await fetch('https://fp-blog.onrender.com/api/blogs');
+                const results = await fetch('/api/blogs');
                 const json = await results.json();
                 if (results.ok) {
                     setBlogs(json);

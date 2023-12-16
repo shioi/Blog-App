@@ -10,7 +10,7 @@ const Account = ({func, setTitle, setBody}) => {
     const [userposts, setUserPosts] = useState('')
     useEffect(() => {
         const fetchAccountInfo = async () => {
-            const results = await fetch('https://fp-blog.onrender.com/api/account', {
+            const results = await fetch('/api/account', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${user.user.token}`
@@ -20,7 +20,7 @@ const Account = ({func, setTitle, setBody}) => {
             if (results.ok) {
                 setUserInfo(json)
                 //send another request to get all the post the user made
-                const results2 = await fetch('https://fp-blog.onrender.com/api/accountpost', {
+                const results2 = await fetch('/api/accountpost', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${user.user.token}`

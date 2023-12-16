@@ -36,7 +36,7 @@ const editorRef = useRef(null);
         formData.append('body', editorRef.current.getContent())
         formData.append('file', file);
         //console.log(user)
-        const response = await fetch('https://fp-blog.onrender.com/api/blogs/' + current._id , {
+        const response = await fetch('/api/blogs/' + current._id , {
             method: 'PATCH',
             body: formData,
             headers: {

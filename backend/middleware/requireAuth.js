@@ -11,7 +11,7 @@ const requireAuth = async (req, res, next) => {
     }
      
     const token = authorization.split(' ')[1]
-    console.log(token)
+    //console.log(token)
     
     try {
         //verify the token here
@@ -19,7 +19,7 @@ const requireAuth = async (req, res, next) => {
         req.user = await User.findOne({ _id }).select('username')
         next()
     } catch (error) {
-        console.log("here i am ")
+        //console.log("here i am ")
         res.status(401).json({error: 'Request is not authorized'}) 
     }
 }

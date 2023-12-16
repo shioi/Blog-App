@@ -23,7 +23,7 @@ const BlogDetails = ({ blog, func }) => {
     const newTotalLike = updatedLike ? totalLike + 1 : totalLike - 1;
 
     try {
-      const response = await fetch('https://fp-blog.onrender.com/api/blogs/' + current._id, {
+      const response = await fetch('/api/blogs/' + current._id, {
         method: 'PATCH',
         body: JSON.stringify({ likes: newTotalLike }),
         headers: {
@@ -67,7 +67,7 @@ const BlogDetails = ({ blog, func }) => {
       <a onClick={() => handleClick(blog)}>
         <div className="card rounded-3 text-bg-light h-100">
           <div className="hover-overlay ripple" data-mdb-ripple-color="light">
-            <img src={`https://fp-blog.onrender.com/images/${blog.Image}`} className="card-img-top img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
+            <img src={blog.Image} className="card-img-top img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '250px' }} />
             <a href="#">
               <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
             </a>
@@ -76,7 +76,7 @@ const BlogDetails = ({ blog, func }) => {
             <div>
               <h5 className="card-title">{blog.title}</h5>
               <p className="card-text" dangerouslySetInnerHTML={{ __html: formatText(blog.body) }}></p>
-              <p className="blockquote-footer">{blog.username}</p>
+             <p className="blockquote-footer">{blog.username}</p>
             </div>
         <div className="text-body-secondary d-flex align-items-center justify-content-between mt-auto" style={{ backgroundColor: 'white' }}>
   <p className='card-text'><small className="text-body-secondary">{formattedDate(blog.createdAt)}</small></p>

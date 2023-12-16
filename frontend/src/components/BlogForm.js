@@ -32,7 +32,7 @@ const BlogForm = () => {
         formData.append('file', file);
         try {
             // POST request to create a new blog
-            const response = await fetch('https://fp-blog.onrender.com/api/blogs', {
+            const response = await fetch('/api/blogs', {
                 method: 'POST',
                 body: formData,
                 headers: {

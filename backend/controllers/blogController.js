@@ -1,8 +1,13 @@
 const Blog = require('../models/blogModel')
 const User = require('../models/userModel')
 const fileUpload = require('express-fileupload');
+//aws
+const AWS = require('aws-sdk');
 
-const mongoose = require('mongoose')
+
+const s3 = new AWS.S3();
+
+const mongoose = require('mongoose');
 // get all the blogs
 
 const getBlogs = async (req, res) => {
@@ -32,15 +37,35 @@ const getBlog = async (req, res) => {
     return res.status(200).json(blog)
 }
 
-
+const upload = (req) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const filename = req.originalfilename + "-" + uniqueSuffix
+    const params = {
+        Bucket: 'fp-blog-images',
+        Key: filename,
+        Body: req.buffer
+    };
+    s3.upload(params, (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error uploading file');
+        }
+        console.log(`Image inserted: ${Image}`)
+    })
+    const Image = "https://fp-blog-images.s3.amazonaws.com/" + filename
+    return Image
+}
 
 // create new blog
 const createBlog = async (req, res) => {
-    console.log(req.body)
+    var Image = "https://fp-blog-images.s3.amazonaws.com/lambda_cover.png"
+    if (req.file) {
+        Image = upload(req.file)
+    }   
+
     const { title, body} = req.body
     const username = req.user.username
     const likes = 0
-    const Image = req.filename ? req.filename : 'lambda_cover.png'
     try {
         const blog = await Blog.create({ username, title, body, Image, likes })
         res.status(200).json(blog)
@@ -72,17 +97,11 @@ const deleteBlog = async (req, res) => {
 
 // update a blog
 const updateBlog = async (req, res) => {
-    console.log("new request")
     //find the id
     const { id } = req.params
-    console.log(req)
-    console.log(req.body)
-    try {
-        const Image = req.filename
+    if (req.file) {
+        const Image = upload(req.file)
         req.body.Image = Image
-        console.log(req.body)
-    } catch (error) {
-     console.log("no file")   
     }
     
     //verify id

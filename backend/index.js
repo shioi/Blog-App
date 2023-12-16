@@ -31,7 +31,7 @@ app.use('/api/user', userRoutes)
 app.use(requireAuth)
 app.get( '/api/account',async (req, res) => {
 
-    console.log("hello")
+   // console.log("hello")
     const username = req.user.username
 
     const user = await User.findOne({ username })
