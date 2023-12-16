@@ -1,11 +1,14 @@
+import API_BASE_URL from "../apiconfig"
+
 const { useEffect, useState } = require("react")
+
 
 const Details = ({ current }) => {
     console.log('/api/blogs/' + current._id)
     const [blog, setBlog] = useState(null)
     useEffect(() => {
         const fetchBlog = async () => {
-            const results = await fetch('/api/blogs/' + current._id)
+            const results = await fetch(API_BASE_URL + '/api/blogs/' + current._id)
             const json = await results.json()
             if (results.ok) {
                 setBlog(json)

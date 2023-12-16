@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatDistanceToNow, isYesterday, parseISO } from 'date-fns';
 import { useAuthContext } from '../hooks/useAuthContext'
+import API_BASE_URL from '../apiconfig'
 
 const BlogDetails = ({ blog, func }) => {
   const user = useAuthContext();
@@ -23,7 +24,7 @@ const BlogDetails = ({ blog, func }) => {
     const newTotalLike = updatedLike ? totalLike + 1 : totalLike - 1;
 
     try {
-      const response = await fetch('/api/blogs/' + current._id, {
+      const response = await fetch(API_BASE_URL + '/api/blogs/' + current._id, {
         method: 'PATCH',
         body: JSON.stringify({ likes: newTotalLike }),
         headers: {

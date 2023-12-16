@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BlogDetails from "../components/BlogDetails";
+import API_BASE_URL from "../apiconfig"
 
 const Home = ({ func }) => {
     const [blogs, setBlogs] = useState(null);
@@ -9,7 +10,7 @@ const Home = ({ func }) => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const results = await fetch('/api/blogs');
+                const results = await fetch(API_BASE_URL+"/api/blogs");
                 const json = await results.json();
                 if (results.ok) {
                     setBlogs(json);

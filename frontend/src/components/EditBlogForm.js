@@ -2,6 +2,7 @@ import { useState, useRef} from "react"
 import { Editor } from "@tinymce/tinymce-react"
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../apiconfig";
 
 
 const EditBlogForm = ({ current }) => {
@@ -36,7 +37,7 @@ const editorRef = useRef(null);
         formData.append('body', editorRef.current.getContent())
         formData.append('file', file);
         //console.log(user)
-        const response = await fetch('/api/blogs/' + current._id , {
+        const response = await fetch(API_BASE_URL + '/api/blogs/' + current._id , {
             method: 'PATCH',
             body: formData,
             headers: {

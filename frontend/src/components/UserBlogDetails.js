@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, isYesterday, parseISO } from 'date-fns';
 import { useAuthContext } from '../hooks/useAuthContext'
+import API_BASE_URL from '../apiconfig'
 
 const UserBlogDetails = ({ blog, func}) => {
   const user = useAuthContext()
@@ -21,7 +22,7 @@ const UserBlogDetails = ({ blog, func}) => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch('/api/blogs/' + blog._id, {
+    const response = await fetch(API_BASE_URL + '/api/blogs/' + blog._id, {
       method: 'DELETE',
        headers: {
         'Authorization': `Bearer ${user.user.token}`
@@ -53,7 +54,7 @@ const UserBlogDetails = ({ blog, func}) => {
           <div className="col-md-4">
             <div className="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
               {/* Add max-height style to limit image height */}
-              <img src={"/images/" + blog.Image} className="img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '200px' }} />
+              <img src={blog.Image} className="img-fluid rounded-3" alt="blog cover" style={{ maxHeight: '200px' }} />
               <p onClick={() => handleClick(blog)}>
                 <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
               </p>

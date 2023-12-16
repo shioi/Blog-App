@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from '../hooks/useAuthContext'
+import API_BASE_URL from "../apiconfig"
 
 //component
 import UserBlogDetails from "../components/UserBlogDetails"
@@ -10,7 +11,7 @@ const Account = ({func, setTitle, setBody}) => {
     const [userposts, setUserPosts] = useState('')
     useEffect(() => {
         const fetchAccountInfo = async () => {
-            const results = await fetch('/api/account', {
+            const results = await fetch(API_BASE_URL + '/api/account', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${user.user.token}`
@@ -20,7 +21,7 @@ const Account = ({func, setTitle, setBody}) => {
             if (results.ok) {
                 setUserInfo(json)
                 //send another request to get all the post the user made
-                const results2 = await fetch('/api/accountpost', {
+                const results2 = await fetch(API_BASE_URL + '/api/accountpost', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${user.user.token}`

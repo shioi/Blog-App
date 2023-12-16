@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext"
+import API_BASE_URL from '../apiconfig'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
@@ -18,7 +19,7 @@ export const useLogin = () => {
         } else {
             body['username'] = arg1
         }
-        const response = await fetch('/api/user/login', {
+        const response = await fetch(API_BASE_URL + '/api/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
