@@ -15,6 +15,7 @@ This is a simple blog application where users can post their blogs mainly about 
 * React js
 * Node js
 * Bootstrap
+* S3 buckets
 
 ### Running on the local system
 
@@ -30,6 +31,7 @@ This is a simple blog application where users can post their blogs mainly about 
 * Start posting by going to the post
 * you can click on your profile to edit any post
 * Can add images as the cover image
+* Also in AWS with 2 ec2 instances 
 
 ### Basic Design
 * Node.js server serving the required APIs for all the required operations like getting the post, logging in to the users, etc.
